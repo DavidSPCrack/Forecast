@@ -4,5 +4,21 @@
     <string name="app_name">Forecast</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="texto1">Hoy - soleado - 19-30</string>
+    <string name="texto2">Mañana - nublado - 18-29</string>
+    <string name="texto3">Miércoles - lluvia de meteoritos - 18-29</string>
+    <string name="texto4">Jueves - soleado - 17-28</string>
+    <string name="texto5">Viernes - soleado - 17-28</string>
+    <string name="texto6">Sabado - ¡Ayuda! ¡estoy atrapado en la estación del tiempo! - 19-29</string>
+    <string name="texto7">Domingo - soleado - 20-32</string>
+    <string-array name="tiempos">
+        <item>@string/texto1</item>
+        <item>@string/texto2</item>
+        <item>@string/texto3</item>
+        <item>@string/texto4</item>
+        <item>@string/texto5</item>
+        <item>@string/texto6</item>
+        <item>@string/texto7</item>
+    </string-array>
 
 </resources>
