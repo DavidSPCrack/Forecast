@@ -12,7 +12,9 @@ import java.net.ProtocolException;
 import java.net.URL;
 
 /**
- * Created by usuario.apellido on 12/12/2014.
+ * Created by David on 12/12/2014.
+ *
+ * @author David
  */
 public class WeatherConn {
 
@@ -63,7 +65,7 @@ public class WeatherConn {
             urlConnection.connect();
             //Read the input stream into a String
             InputStream inputStream = urlConnection.getInputStream();
-            StringBuffer buffer = new StringBuffer();
+            StringBuilder buffer = new StringBuilder();
             if (inputStream == null) {
                 //Nothing to do.
                 return "";
@@ -74,20 +76,22 @@ public class WeatherConn {
                 //Since it's JSON, adding a new line isn't necessary (it won't affect parsing)
                 //But it does make debugginga *lot* easier if youpr into ut the completed
                 //buffer for debugging.
-                buffer.append(line + "\n");
+                buffer.append(line);
+                buffer.append("\n");
             }
             if (buffer.length() == 0) {
                 //Stream was empty. No point in parsing.
                 return "";
             }
             forecastJsonStr = buffer.toString();
-        } catch (MalformedURLException e) {
-            Log.e(TAG, "Error", e);
-        } catch (ProtocolException e) {
+        } catch (MalformedURLException | ProtocolException e) {
             Log.e(TAG, "Error", e);
         } catch (IOException e) {
             Log.e(TAG, "Error", e);
             //If the code didn't successfully get the weather data,there's no point in attemping to parse it.
+            return "";
+        } catch(Throwable t) {
+            Log.e(TAG, "Error", t);
             return "";
         } finally {
             if (urlConnection != null) {
@@ -106,14 +110,17 @@ public class WeatherConn {
     }
 
     public String getTranslation(String code) {
-        for (int i=0;i<TRANSLATOR.length;i++) {
-            if(TRANSLATOR[i].length > 1) {
-                String codeAux = TRANSLATOR[i][0];
+        for (String[] translation : TRANSLATOR) {
+            if(translation.length > 1) {
+                String codeAux = translation[0];
                 if(codeAux.equals(code)) {
-                    return TRANSLATOR[i][1];
+                    return translation[1];
                 }
             }
         }
         return code;
     }
+
+
+
 }
